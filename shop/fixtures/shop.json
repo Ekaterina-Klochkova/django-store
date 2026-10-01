@@ -1,0 +1,132 @@
+[
+{
+  "model": "shop.productcategory",
+  "pk": 2,
+  "fields": {
+    "name": "Стулья",
+    "description": ""
+  }
+},
+{
+  "model": "shop.productcategory",
+  "pk": 3,
+  "fields": {
+    "name": "Столы",
+    "description": ""
+  }
+},
+{
+  "model": "shop.productcategory",
+  "pk": 4,
+  "fields": {
+    "name": "Шкафы",
+    "description": ""
+  }
+},
+{
+  "model": "shop.productcategory",
+  "pk": 5,
+  "fields": {
+    "name": "Тумбочки и комоды",
+    "description": ""
+  }
+},
+{
+  "model": "shop.productcategory",
+  "pk": 6,
+  "fields": {
+    "name": "Декор",
+    "description": ""
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 2,
+  "fields": {
+    "name": "Стул \"Сканди\"",
+    "image": "products_media/chair.png",
+    "description": "Стул «Сканди» — классика скандинавского дизайна. Каркас из массива дуба, мягкое сиденье с тканевой обивкой. Подходит для кухни, столовой или рабочего кабинета. Высота сиденья 45 см, выдерживает до 120 кг.",
+    "short_description": "Массив дуба, обивка велюр",
+    "tag": "",
+    "price": "5900.00",
+    "old_price": null,
+    "quantity": 1,
+    "category": 2
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 3,
+  "fields": {
+    "name": "Табурет круглый",
+    "image": "products_media/tbround.jpg",
+    "description": "Лаконичный дизайн в натуральном дубе. Устойчивая конструкция, гладкая отшлифованная поверхность. Высота 45 см — идеально для кухни, бара или гостиной. Выдерживает до 100 кг.",
+    "short_description": "Дуб, 45 см",
+    "tag": "",
+    "price": "3500.00",
+    "old_price": null,
+    "quantity": 1,
+    "category": 2
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 4,
+  "fields": {
+    "name": "Табурет квадратный",
+    "image": "products_media/tbsquare.jpg",
+    "description": "Лаконичный дизайн в натуральном дубе. Устойчивая конструкция, гладкая отшлифованная поверхность. Высота 45 см — идеально для кухни, бара или гостиной. Выдерживает до 100 кг.",
+    "short_description": "Дуб, 45 см",
+    "tag": "",
+    "price": "3500.00",
+    "old_price": null,
+    "quantity": 1,
+    "category": 2
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 5,
+  "fields": {
+    "name": "Кофейный столик",
+    "image": "products_media/coffee_table.jpg",
+    "description": "Уютный столик для вашего дома",
+    "short_description": "Дуб",
+    "tag": "",
+    "price": "4500.00",
+    "old_price": null,
+    "quantity": 1,
+    "category": 3
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 6,
+  "fields": {
+    "name": "Прикроватная тумбочка",
+    "image": "products_media/bedsd_table.jpg",
+    "description": "Прикроватная тумбочка для вашего дома",
+    "short_description": "Бук",
+    "tag": "",
+    "price": "5200.00",
+    "old_price": null,
+    "quantity": 1,
+    "category": 5
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 7,
+  "fields": {
+    "name": "Подсвечник двойной",
+    "image": "products_media/candle.jpg",
+    "description": "Круглый деревянный подсвечник",
+    "short_description": "Белый, круглый",
+    "tag": "",
+    "price": "1500.00",
+    "old_price": null,
+    "quantity": 1,
+    "category": 6
+  }
+}
+]

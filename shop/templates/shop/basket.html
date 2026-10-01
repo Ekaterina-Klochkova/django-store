@@ -1,0 +1,82 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'css/basket.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <h1>Корзина</h1>
+        <p class="breadcrumbs">
+            <a href="{% url 'index' %}">Главная</a> /
+            <a href="{% url 'products:index' %}">Каталог</a> /
+            Корзина
+        </p>
+    </div>
+</section>
+
+<section class="basket-page">
+    <div class="container">
+
+        {% if baskets %}
+        <div class="basket-layout">
+
+            <div class="basket-items">
+                <div class="basket-header">
+                    <h2>Корзина</h2>
+                    <span class="basket-count">{{ total_quantity }} шт.</span>
+                </div>
+
+                {% for b in baskets %}
+                <div class="basket-item">
+                    <div class="basket-item-info">
+                        <h3>{{ b.product.name }}</h3>
+                        <p>{{ b.product.short_description }}</p>
+                    </div>
+
+                    <div class="basket-item-actions">
+                        <div class="basket-item-quantity">
+                            <span>{{ b.quantity }} × {{ b.product.price }} ₽</span>
+                        </div>
+                        <div class="basket-item-sum">
+                            {{ b.sum }} ₽
+                        </div>
+                        <div class="basket-item-buttons">
+                            <a href="{% url 'products:basket_add' b.product.id %}" title="Добавить ещё" class="basket-btn-add">
+                                +
+                            </a>
+                            <a href="{% url 'products:basket_delete' b.id %}" title="Удалить" class="basket-btn-delete">
+                                ✕
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="basket-total">
+                <h3>Итого</h3>
+                <div class="basket-total-sum">{{ total_sum }} ₽</div>
+                <a href="#" class="btn">Оформить заказ</a>
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="basket-empty">
+            <div class="basket-empty-icon">🛒</div>
+            <h2>Корзина пуста</h2>
+            <p>Добавьте товары из каталога, чтобы оформить заказ</p>
+            <a href="{% url 'products:index' %}" class="btn">Перейти в каталог</a>
+        </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

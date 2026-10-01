@@ -1,0 +1,117 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'css/products.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Каталог мебели</h1>
+            <p class="breadcrumbs">
+                <a href="{% url 'index' %}">Главная</a> / Каталог
+            </p>
+        </div>
+    </section>
+
+    <section class="catalog-page">
+        <div class="container">
+            <div class="catalog-layout">
+
+                <aside class="sidebar">
+                    <div class="filter-block">
+                        <h3>Категории</h3>
+                        <ul class="category-list">
+                            {% for category in categories %}
+                            <li><a href="{% url 'products:category' category.id %}" class="list-group-item">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="filter-block">
+                        <h3>Цена</h3>
+                        <div class="price-range">
+                            <input type="number" placeholder="от 0 ₽">
+                            <span>—</span>
+                            <input type="number" placeholder="до 100 000 ₽">
+                        </div>
+                        <button class="btn-filter">Применить</button>
+                    </div>
+
+                    <div class="filter-block">
+                        <h3>Материал</h3>
+                        <label class="checkbox-label">
+                            <input type="checkbox"> Дуб
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox"> Сосна
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox"> Ткань
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox"> Кожа
+                        </label>
+                    </div>
+                </aside>
+
+                <div class="products-area">
+
+                    <div class="sort-bar">
+                        <span>Найдено: <strong>{{ products|length }} товаров</strong></span>
+                        <select>
+                            <option>По популярности</option>
+                            <option>По цене (дешевле)</option>
+                            <option>По цене (дороже)</option>
+                            <option>По новизне</option>
+                        </select>
+                    </div>
+
+                    <div class="product-grid">
+                        {% for product in products %}
+                        <div class="product-card">
+                            {% if product.image %}
+                                <img src="/media/{{ product.image }}" alt="{{ product.name }}">
+                            {% else %}
+                                <img src="https://placehold.co/400x300/f5ede6/5a3d2b?text=Нет+фото" alt="{{ product.name }}">
+                            {% endif %}
+                            <div class="product-info">
+
+                                {% if product.tag %}
+                                    <span class="tag">{{ product.tag }}</span>
+                                {% endif %}
+
+                                <h3>{{ product.name }}</h3>
+                                <p class="desc">{{ product.short_description }}</p>
+
+                                <div class="price">
+                                    {{ product.price }} ₽
+                                    {% if product.old_price %}
+                                        <small>{{ product.old_price }} ₽</small>
+                                    {% endif %}
+                                </div>
+
+                                <form method="post" action="{% url 'products:basket_add' product.id %}" style="display: inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-buy">В корзину</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="pagination">
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">→</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,208 @@
+.basket-page {
+    padding: 60px 0 80px;
+}
+
+.basket-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    align-items: start;
+}
+
+.basket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f5ede6;
+}
+
+.basket-header h2 {
+    font-size: 24px;
+    color: #3d2a1b;
+}
+
+.basket-count {
+    background: #f5ede6;
+    color: #5a3d2b;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.basket-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    background: #fff;
+    padding: 22px 25px;
+    border-radius: 14px;
+    margin-bottom: 15px;
+    border: 1px solid #f0ebe6;
+    transition: 0.3s;
+}
+
+.basket-item:hover {
+    border-color: #e0d8d0;
+    box-shadow: 0 4px 15px rgba(90, 61, 43, 0.06);
+}
+
+.basket-item-info {
+    flex: 1;
+}
+
+.basket-item-info h3 {
+    font-size: 17px;
+    color: #3d2a1b;
+    margin-bottom: 6px;
+}
+
+.basket-item-info p {
+    font-size: 14px;
+    color: #7a6a5a;
+}
+
+.basket-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.basket-item-quantity {
+    color: #7a6a5a;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.basket-item-sum {
+    font-size: 18px;
+    font-weight: 700;
+    color: #5a3d2b;
+    white-space: nowrap;
+}
+
+.basket-item-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.basket-btn-add,
+.basket-btn-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    transition: 0.3s;
+    border: 1px solid #f0ebe6;
+}
+
+.basket-btn-add {
+    color: #5a3d2b;
+    background: #faf8f6;
+}
+
+.basket-btn-add:hover {
+    background: #5a3d2b;
+    color: #fff;
+    border-color: #5a3d2b;
+}
+
+.basket-btn-delete {
+    color: #c0392b;
+    background: #fdf5f4;
+}
+
+.basket-btn-delete:hover {
+    background: #c0392b;
+    color: #fff;
+    border-color: #c0392b;
+}
+
+.basket-total {
+    background: #fff;
+    padding: 30px;
+    border-radius: 14px;
+    border: 1px solid #f0ebe6;
+    box-shadow: 0 4px 20px rgba(90, 61, 43, 0.06);
+    position: sticky;
+    top: 100px;
+}
+
+.basket-total h3 {
+    font-size: 18px;
+    color: #3d2a1b;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f5ede6;
+}
+
+.basket-total-sum {
+    font-size: 32px;
+    font-weight: 700;
+    color: #5a3d2b;
+    margin-bottom: 25px;
+    text-align: right;
+}
+
+.basket-total .btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 16px;
+}
+
+.basket-empty {
+    text-align: center;
+    padding: 80px 20px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #f0ebe6;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.basket-empty-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.basket-empty h2 {
+    font-size: 26px;
+    color: #3d2a1b;
+    margin-bottom: 10px;
+}
+
+.basket-empty p {
+    color: #7a6a5a;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 900px) {
+    .basket-layout {
+        grid-template-columns: 1fr;
+    }
+    .basket-total {
+        position: static;
+    }
+}
+
+@media (max-width: 600px) {
+    .basket-item {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .basket-item-actions {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+    }
+}

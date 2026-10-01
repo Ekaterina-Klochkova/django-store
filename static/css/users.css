@@ -1,0 +1,124 @@
+.auth-page {
+    padding: 60px 0 80px;
+    background: #faf8f6;
+    min-height: 60vh;
+}
+
+.auth-box {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(90, 61, 43, 0.08);
+    border: 1px solid #f0ebe6;
+}
+
+.auth-box h1 {
+    text-align: center;
+    color: #3d2a1b;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #5a4a3a;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e0d8d0;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    background: #faf8f6;
+    color: #2d2d2d;
+    transition: 0.2s;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    border-color: #c49a6c;
+    background: #fff;
+}
+
+.form-group input::placeholder {
+    color: #b8aa98;
+    opacity: 1;
+}
+
+.auth-box input.btn {
+    width: 100%;
+    margin-top: 10px;
+    display: inline-block;
+    background: #5a3d2b;
+    color: #fff;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: 0.3s;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.auth-box input.btn:hover {
+    background: #c49a6c;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(90, 61, 43, 0.25);
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #7a6a5a;
+    font-size: 14px;
+}
+
+.auth-link a {
+    color: #c49a6c;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+.form-errors {
+    background: #fdecea;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.form-errors ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.form-errors li {
+    margin-bottom: 6px;
+}
+
+.form-errors li:last-child {
+    margin-bottom: 0;
+}

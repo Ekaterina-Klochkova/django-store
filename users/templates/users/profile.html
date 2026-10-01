@@ -1,0 +1,59 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<section class="auth-page">
+    <div class="container">
+        <div class="auth-box profile">
+            <h1>Личный кабинет</h1>
+
+            {% if user.image %}
+                <div class="profile-avatar">
+                    <img src="/media/{{ user.image }}" alt="Аватар">
+                </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">Логин</label>
+                    {{ form.username }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.first_name.id_for_label }}">Имя</label>
+                    {{ form.first_name }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                    {{ form.last_name }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.image.id_for_label }}">Аватар</label>
+                    {{ form.image }}
+                </div>
+
+                <div class="profile-actions">
+                    <input type="submit" class="btn" value="Сохранить">
+                </div>
+            </form>
+
+            <div class="profile-logout">
+                <a href="{% url 'users:logout' %}" class="btn-logout">Выйти</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

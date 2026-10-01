@@ -1,0 +1,37 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-text">
+            <h1>Создайте уют<br>с <span>натуральной</span> мебелью</h1>
+            <p>Экологичные материалы, продуманный дизайн и ручная работа. Мебель, которая будет радовать вас десятилетиями.</p>
+            <a href="{% url 'products:index' %}" class="btn">Перейти в каталог</a>
+        </div>
+    </div>
+</section>
+
+<section class="categories">
+    <div class="container">
+        <h2 class="section-title">Выберите категорию</h2>
+        <p class="section-subtitle">Мебель на любой вкус и под любой интерьер</p>
+        <div class="category-grid">
+            {% for category in categories %}
+            <div class="category-item">
+                <h3>{{ category.name }}</h3>
+                <p>{{ category.description }}</p>
+            </div>
+            {% empty %}
+            <p>Категорий пока нет 😔</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
