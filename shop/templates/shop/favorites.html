@@ -1,0 +1,75 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'css/favorites.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <h1>Избранное</h1>
+        <p class="breadcrumbs">
+            <a href="{% url 'index' %}">Главная</a> /
+            <a href="{% url 'products:index' %}">Каталог</a> /
+            Избранное
+        </p>
+    </div>
+</section>
+
+<section class="favorites-page">
+    <div class="container">
+
+        {% if favorites %}
+        <div class="favorites-header">
+            <h2>Понравившиеся товары</h2>
+            <span class="favorites-count">{{ favorites|length }} шт.</span>
+        </div>
+
+        <div class="product-grid">
+            {% for fav in favorites %}
+            <div class="product-card">
+                {% if fav.product.image %}
+                    <img src="/media/{{ fav.product.image }}" alt="{{ fav.product.name }}">
+                {% else %}
+                    <img src="https://placehold.co/400x300/f5ede6/5a3d2b?text=Нет+фото" alt="{{ fav.product.name }}">
+                {% endif %}
+                <div class="product-info">
+
+                    {% if fav.product.tag %}
+                        <span class="tag">{{ fav.product.tag }}</span>
+                    {% endif %}
+
+                    <h3>{{ fav.product.name }}</h3>
+                    <p class="desc">{{ fav.product.short_description }}</p>
+
+                    <div class="price">{{ fav.product.price }} ₽</div>
+
+                    <div class="favorite-actions">
+                        <a href="{% url 'products:favorite_delete' fav.product.id %}" class="btn-favorite-remove">Убрать из избранного</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+
+        <div class="favorites-empty">
+            <div class="favorites-empty-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" stroke-width="1.5" stroke="#e0d8d0" fill="none">
+                    <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+                </svg>
+            </div>
+            <h2>В избранном пусто</h2>
+            <p>Добавляйте товары, которые вам понравились</p>
+            <a href="{% url 'products:index' %}" class="btn">Перейти в каталог</a>
+        </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

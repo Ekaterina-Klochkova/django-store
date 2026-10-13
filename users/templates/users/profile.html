@@ -11,11 +11,15 @@
         <div class="auth-box profile">
             <h1>Личный кабинет</h1>
 
-            {% if user.image %}
-                <div class="profile-avatar">
+            <div class="profile-avatar">
+                {% if user.image %}
                     <img src="/media/{{ user.image }}" alt="Аватар">
-                </div>
-            {% endif %}
+                {% else %}
+                    <div class="avatar-placeholder">
+                        {{ user.username|first|upper }}
+                    </div>
+                {% endif %}
+            </div>
 
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}

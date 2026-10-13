@@ -3,11 +3,20 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
     color: #2d2d2d;
     background: #faf8f6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
+
+main {
+    flex: 1;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -22,21 +31,26 @@ header {
     top: 0;
     z-index: 100;
 }
+
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
 }
+
 .logo {
     font-size: 28px;
     font-weight: 700;
     color: #5a3d2b;
     letter-spacing: 1px;
+    text-decoration: none;
 }
+
 .logo span {
     color: #c49a6c;
 }
+
 nav a {
     margin-left: 30px;
     text-decoration: none;
@@ -45,16 +59,20 @@ nav a {
     transition: 0.3s;
     font-size: 16px;
 }
+
 nav a:hover {
     color: #c49a6c;
 }
+
 .header-icons {
     display: flex;
     gap: 20px;
     font-size: 22px;
+    align-items: center;
 }
 
-.header-icons a {
+.header-icons a,
+.header-icons .icon-btn {
     cursor: pointer;
     transition: 0.3s;
     display: inline-flex;
@@ -63,16 +81,24 @@ nav a:hover {
     position: relative;
     text-decoration: none;
     color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
 }
 
-.header-icons a svg {
+.header-icons a svg,
+.header-icons .icon-btn svg {
     transition: 0.3s;
+    stroke: #2d2d2d;
 }
 
-.header-icons a:hover svg {
+.header-icons a:hover svg,
+.header-icons .icon-btn:hover svg {
     stroke: #c49a6c;
     transform: scale(1.1);
 }
+
 .cart-count {
     position: absolute;
     top: -8px;
@@ -88,6 +114,54 @@ nav a:hover {
     justify-content: center;
     font-weight: 700;
 }
+
+.header-search {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.header-search.hidden {
+    display: none;
+}
+
+.header-search input[type="text"] {
+    padding: 8px 14px;
+    border: 1px solid #e0d8d0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    width: 200px;
+    transition: 0.2s;
+    background: #faf8f6;
+    color: #2d2d2d;
+}
+
+.header-search input[type="text"]:focus {
+    border-color: #c49a6c;
+    background: #fff;
+    width: 250px;
+}
+
+.header-search button[type="submit"] {
+    padding: 8px 16px;
+    background: #5a3d2b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.header-search button[type="submit"]:hover {
+    background: #c49a6c;
+}
+
 .btn {
     display: inline-block;
     background: #5a3d2b;
@@ -100,7 +174,9 @@ nav a:hover {
     font-size: 16px;
     border: none;
     cursor: pointer;
+    font-family: inherit;
 }
+
 .btn:hover {
     background: #c49a6c;
     transform: translateY(-3px);
@@ -112,26 +188,32 @@ footer {
     color: #ccc;
     padding: 50px 0 30px;
 }
+
 footer .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 40px;
 }
+
 footer h4 {
     color: #fff;
     font-size: 17px;
     margin-bottom: 18px;
 }
-footer p, footer a {
+
+footer p,
+footer a {
     color: #aaa;
     font-size: 14px;
     line-height: 2;
     text-decoration: none;
     display: block;
 }
+
 footer a:hover {
     color: #c49a6c;
 }
+
 .footer-bottom {
     text-align: center;
     padding-top: 40px;
@@ -142,11 +224,72 @@ footer a:hover {
     color: #777;
 }
 
-@media (max-width: 768px) {
-    nav a { margin-left: 15px; font-size: 14px; }
-    .header-icons span { font-size: 18px; }
+.scroll-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #5a3d2b;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(90, 61, 43, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    -webkit-appearance: none;
+    appearance: none;
 }
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-top-btn:hover {
+    background: #c49a6c;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(196, 154, 108, 0.4);
+}
+
+.scroll-top-btn:active {
+    transform: translateY(-2px);
+}
+
+/* На узких экранах — чуть меньше */
 @media (max-width: 480px) {
-    header .container { flex-direction: column; gap: 12px; }
-    nav a { margin: 0 10px; }
+    .scroll-top-btn {
+        width: 44px;
+        height: 44px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav a {
+        margin-left: 15px;
+        font-size: 14px;
+    }
+    .header-icons {
+        font-size: 18px;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    header .container {
+        flex-direction: column;
+        gap: 12px;
+    }
+    nav a {
+        margin: 0 10px;
+    }
 }

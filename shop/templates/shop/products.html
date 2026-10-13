@@ -32,41 +32,39 @@
 
                     <div class="filter-block">
                         <h3>Цена</h3>
-                        <div class="price-range">
-                            <input type="number" placeholder="от 0 ₽">
-                            <span>—</span>
-                            <input type="number" placeholder="до 100 000 ₽">
-                        </div>
-                        <button class="btn-filter">Применить</button>
-                    </div>
-
-                    <div class="filter-block">
-                        <h3>Материал</h3>
-                        <label class="checkbox-label">
-                            <input type="checkbox"> Дуб
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox"> Сосна
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox"> Ткань
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox"> Кожа
-                        </label>
+                        <form method="get" class="price-filter-form">
+                            {% if category_id %}
+                                <input type="hidden" name="category" value="{{ category_id }}">
+                            {% endif %}
+                            {% if search_query %}
+                                <input type="hidden" name="search" value="{{ search_query }}">
+                            {% endif %}
+                            {% if current_sort %}
+                                <input type="hidden" name="sort" value="{{ current_sort }}">
+                            {% endif %}
+                            <div class="price-range">
+                                <input type="number" name="price_min" placeholder="от 0 ₽" value="{{ price_min }}" min="0">
+                                <span>—</span>
+                                <input type="number" name="price_max" placeholder="до 100 000 ₽" value="{{ price_max }}" min="0">
+                            </div>
+                            <button type="submit" class="btn-filter">Применить</button>
+                        </form>
                     </div>
                 </aside>
 
                 <div class="products-area">
 
                     <div class="sort-bar">
-                        <span>Найдено: <strong>{{ products|length }} товаров</strong></span>
-                        <select>
-                            <option>По популярности</option>
-                            <option>По цене (дешевле)</option>
-                            <option>По цене (дороже)</option>
-                            <option>По новизне</option>
-                        </select>
+                        <span>Показано: <strong>{{ products.start_index }}–{{ products.end_index }}</strong> из <strong>{{ products.paginator.count }}</strong></span>
+                        <form method="get" class="sort-form">
+                            <select name="sort" onchange="this.form.submit()">
+                                <option value="">По умолчанию</option>
+                                <option value="price_asc" {% if current_sort == 'price_asc' %}selected{% endif %}>По цене (дешевле)</option>
+                                <option value="price_desc" {% if current_sort == 'price_desc' %}selected{% endif %}>По цене (дороже)</option>
+                                <option value="name_asc" {% if current_sort == 'name_asc' %}selected{% endif %}>По названию (А-Я)</option>
+                                <option value="newest" {% if current_sort == 'newest' %}selected{% endif %}>Сначала новые</option>
+                            </select>
+                        </form>
                     </div>
 
                     <div class="product-grid">
@@ -97,17 +95,57 @@
                                     {% csrf_token %}
                                     <button type="submit" class="btn-buy">В корзину</button>
                                 </form>
+                                {% if user.is_authenticated %}
+                                    {% if product.id in favorite_ids %}
+                                        <a href="{% url 'products:favorite_delete' product.id %}" class="btn-favorite active" title="Убрать из избранного">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="2" stroke="#c49a6c" fill="#c49a6c">
+                                                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+                                            </svg>
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'products:favorite_add' product.id %}" class="btn-favorite" title="В избранное">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="2" stroke="#c49a6c" fill="none">
+                                                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+                                            </svg>
+                                        </a>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                         </div>
                         {% endfor %}
                     </div>
 
+                    {% if products.has_other_pages %}
                     <div class="pagination">
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">→</a>
+                        {% if products.has_previous %}
+                            {% if category_id %}
+                                <a href="?page={{ products.previous_page_number }}">←</a>
+                            {% else %}
+                                <a href="{% url 'products:page' products.previous_page_number %}">←</a>
+                            {% endif %}
+                        {% endif %}
+
+                        {% for num in products.paginator.page_range %}
+                            {% if products.number == num %}
+                                <a href="#" class="active">{{ num }}</a>
+                            {% else %}
+                                {% if category_id %}
+                                    <a href="?page={{ num }}">{{ num }}</a>
+                                {% else %}
+                                    <a href="{% url 'products:page' num %}">{{ num }}</a>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if products.has_next %}
+                            {% if category_id %}
+                                <a href="?page={{ products.next_page_number }}">→</a>
+                            {% else %}
+                                <a href="{% url 'products:page' products.next_page_number %}">→</a>
+                            {% endif %}
+                        {% endif %}
                     </div>
+                    {% endif %}
 
                 </div>
             </div>
